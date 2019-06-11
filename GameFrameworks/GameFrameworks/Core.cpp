@@ -10,6 +10,7 @@
 
 #include "PathUtil.h"
 #include "ConfigUtil.h"
+#include "Direct3D.h"
 
 namespace meltshine
 {
@@ -21,6 +22,10 @@ namespace meltshine
 
 	Core::~Core()
 	{
+		ConfigUtil::Write(TEXT("Graphics"), TEXT("Width"), _d3d->_d3dpp.BackBufferWidth);
+		ConfigUtil::Write(TEXT("Graphics"), TEXT("Height"), _d3d->_d3dpp.BackBufferHeight);
+		ConfigUtil::Write(TEXT("Graphics"), TEXT("Windowed"), _d3d->_d3dpp.Windowed);
+		ConfigUtil::Write(TEXT("Graphics"), TEXT("V-Synced"), _d3d->_vsynced);
 	}
 
 	std::shared_ptr<Core> Core::Create()
@@ -36,7 +41,7 @@ namespace meltshine
 		{
 			MessageBox(
 				0, 
-				TEXT("Core를 초기화하는데 실패했습니다. :\n 인자 'window' 또는 'instance'가 유효하지 않습니다."),
+				TEXT("Core를 초기화하는데 실패했습니다. :\n인자 'window' 또는 'instance'가 유효하지 않습니다."),
 				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
 			return false;
 		}
@@ -47,6 +52,19 @@ namespace meltshine
 
 		PathUtil::Init();
 		ConfigUtil::Init(PathUtil::GetRoot());
+		
+		BOOL windowed = ConfigUtil::ReadInt(TEXT("Graphics"), TEXT("Windowed"));
+		BOOL vsynced = ConfigUtil::ReadInt(TEXT("Graphics"), TEXT("V-Synced"));
+		_d3d = std::shared_ptr<Direct3D>(new Direct3D);
+		
+		if (!_d3d || !_d3d->Init(_window, windowed, vsynced))
+		{
+			MessageBox(
+				0,
+				TEXT("Core를 초기화하는데 실패했습니다. :\nDirect3D를 초기화하는데 실패했습니다."),
+				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
+			return false;
+		}
 
 		return true;
 	}
@@ -75,16 +93,6 @@ namespace meltshine
 		RECT rect = {};
 		GetClientRect(_window, &rect);
 		return rect.bottom - rect.top;
-	}
-
-	HWND Core::GetWinHandle() const
-	{
-		return _window;
-	}
-
-	HINSTANCE Core::GetWinInstance() const
-	{
-		return _instance;
 	}
 
 }

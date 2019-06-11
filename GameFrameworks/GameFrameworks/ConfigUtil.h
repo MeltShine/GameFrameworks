@@ -7,6 +7,7 @@ namespace meltshine
 	public:
 		static void Init(const TCHAR* root_path);
 		static void Write(const TCHAR* section, const TCHAR* key, const TCHAR* str);
+		static void Write(const TCHAR* section, const TCHAR* key, const int& num);
 #ifdef _UNICODE
 		static std::wstring ReadString(const TCHAR* section, const TCHAR* key, const size_t& size);
 #else

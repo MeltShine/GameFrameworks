@@ -1,4 +1,7 @@
 #include "ConfigUtil.h"
+
+#pragma warning(disable:4996)
+
 namespace meltshine
 {
 	TCHAR ConfigUtil::_config_file_path[MAX_PATH];
@@ -11,6 +14,21 @@ namespace meltshine
 	void ConfigUtil::Write(const TCHAR* section, const TCHAR* key, const TCHAR* str)
 	{
 		WritePrivateProfileString(section, key, str, _config_file_path);
+	}
+
+	void ConfigUtil::Write(const TCHAR* section, const TCHAR* key, const int& num)
+	{
+		// int가 표현할 수 있는 최대값은 2,147,483,647이다.
+		// 여기에 추가로 +/- 부호만큼 문자배열을 생성한다.
+		TCHAR bf[11];
+		
+#ifdef _UNICODE
+		_itow_s(num, bf, 11, 10);
+#else
+		_itoa_s(num, bf, 11, 10);
+#endif // _UNICODE
+
+		Write(section, key, bf);	
 	}
 
 #ifdef _UNICODE

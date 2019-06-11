@@ -4,6 +4,7 @@
 #include <Windows.h>
 namespace meltshine
 {
+	class Direct3D;
 	class Core : public std::enable_shared_from_this<Core>
 	{
 	private:
@@ -21,13 +22,15 @@ namespace meltshine
 		void GetWinSize(int& w, int& h) const;
 		int GetWinWidth() const;
 		int GetWinHeight() const;
-		HWND GetWinHandle() const;
-		HINSTANCE GetWinInstance() const;
+		HWND GetWinHandle() const { return _window; }
+		HINSTANCE GetWinInstance() const { return _instance; }
+
+		std::shared_ptr<Direct3D> GetDirect3D() const { return _d3d; }
 
 	private:
 		HWND _window;
 		HINSTANCE _instance;
-
+		std::shared_ptr<Direct3D> _d3d;
 	};
 }
 #endif // !__MELTSHINE_CORE_H__
