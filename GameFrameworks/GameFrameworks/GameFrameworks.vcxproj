@@ -155,6 +155,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ConfigUtil.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Direct3D.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PathUtil.cpp" />
   </ItemGroup>
@@ -162,6 +163,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="ConfigUtil.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="Direct3D.h" />
     <ClInclude Include="PathUtil.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
