@@ -153,12 +153,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="ConfigUtil.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PathUtil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="ConfigUtil.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="PathUtil.h" />
   </ItemGroup>

@@ -9,6 +9,7 @@
 #endif
 
 #include "PathUtil.h"
+#include "ConfigUtil.h"
 
 namespace meltshine
 {
@@ -45,6 +46,8 @@ namespace meltshine
 		_instance = instance;
 
 		PathUtil::Init();
+		ConfigUtil::Init(PathUtil::GetRoot());
+
 		return true;
 	}
 
