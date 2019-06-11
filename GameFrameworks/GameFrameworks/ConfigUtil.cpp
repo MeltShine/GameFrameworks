@@ -8,6 +8,11 @@ namespace meltshine
 		wsprintf(_config_file_path, TEXT("%s%s"), root_path, TEXT("GameOption.ini"));
 	}
 
+	void ConfigUtil::Write(const TCHAR* section, const TCHAR* key, const TCHAR* str)
+	{
+		WritePrivateProfileString(section, key, str, _config_file_path);
+	}
+
 #ifdef _UNICODE
 	std::wstring ConfigUtil::ReadString(const TCHAR* section, const TCHAR* key, const size_t& size)
 	{
