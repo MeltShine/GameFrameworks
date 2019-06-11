@@ -1,5 +1,9 @@
+#ifndef __MELTSHINE_CONFIGUTIL_H__
+#define __MELTSHINE_CONFIGUTIL_H__
+
 #include <Windows.h>
 #include <string>
+
 namespace meltshine
 {
 	class ConfigUtil
@@ -20,3 +24,4 @@ namespace meltshine
 		static TCHAR _config_file_path[MAX_PATH];
 	};
 }
+#endif // !__MELTSHINE_CONFIGUTIL_H__
