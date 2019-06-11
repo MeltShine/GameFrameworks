@@ -8,6 +8,8 @@
 #define new new( _NORMAL_BLOCK, __FILE__, __LINE__ )
 #endif
 
+#include "PathUtil.h"
+
 namespace meltshine
 {
 	Core::Core()
@@ -42,6 +44,7 @@ namespace meltshine
 		_window = window;
 		_instance = instance;
 
+		PathUtil::Init();
 		return true;
 	}
 
