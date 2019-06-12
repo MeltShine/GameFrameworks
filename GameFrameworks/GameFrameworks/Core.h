@@ -5,6 +5,7 @@
 namespace meltshine
 {
 	class Direct3D;
+	class Renderer;
 	class Core : public std::enable_shared_from_this<Core>
 	{
 	private:
@@ -26,11 +27,13 @@ namespace meltshine
 		HINSTANCE GetWinInstance() const { return _instance; }
 
 		std::shared_ptr<Direct3D> GetDirect3D() const { return _d3d; }
+		std::shared_ptr<Renderer> GetRenderer() const { return _renderer; }
 
 	private:
 		HWND _window;
 		HINSTANCE _instance;
 		std::shared_ptr<Direct3D> _d3d;
+		std::shared_ptr<Renderer> _renderer;
 	};
 }
 #endif // !__MELTSHINE_CORE_H__

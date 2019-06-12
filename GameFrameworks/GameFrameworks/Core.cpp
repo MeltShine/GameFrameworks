@@ -1,16 +1,17 @@
 #include "Core.h"
 
-#ifdef _DEBUG
-#define CRTDBG_MAP_ALLOC
-#include <crtdbg.h>
-// #include <new.h>등으로 operator new나 malloc을 
-// Derived해서 정의 한 경우, 사용 할 수 없다.
-#define new new( _NORMAL_BLOCK, __FILE__, __LINE__ )
-#endif
-
 #include "PathUtil.h"
 #include "ConfigUtil.h"
 #include "Direct3D.h"
+#include "Renderer.h"
+
+//#ifdef _DEBUG
+//#define CRTDBG_MAP_ALLOC
+//#include <crtdbg.h>
+//// #include <new.h>등으로 operator new나 malloc을 
+//// Derived해서 정의 한 경우, 사용 할 수 없다.
+//#define new new( _NORMAL_BLOCK, __FILE__, __LINE__ )
+//#endif
 
 namespace meltshine
 {
@@ -35,13 +36,13 @@ namespace meltshine
 
 	bool Core::Init(HWND window, HINSTANCE instance)
 	{
-		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+		//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 		if (!window || !instance)
 		{
 			MessageBox(
 				0, 
-				TEXT("Core를 초기화하는데 실패했습니다. :\n인자 'window' 또는 'instance'가 유효하지 않습니다."),
+				TEXT("Core를 초기화하는데 실패했습니다. \n: 인자 'window' 또는 'instance'가 유효하지 않습니다."),
 				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
 			return false;
 		}
@@ -51,7 +52,7 @@ namespace meltshine
 		_instance = instance;
 
 		PathUtil::Init();
-		ConfigUtil::Init(PathUtil::GetRoot());
+		ConfigUtil::Init(PathUtil::GetDirectory());
 		
 		BOOL windowed = ConfigUtil::ReadInt(TEXT("Graphics"), TEXT("Windowed"));
 		BOOL vsynced = ConfigUtil::ReadInt(TEXT("Graphics"), TEXT("V-Synced"));
@@ -61,7 +62,17 @@ namespace meltshine
 		{
 			MessageBox(
 				0,
-				TEXT("Core를 초기화하는데 실패했습니다. :\nDirect3D를 초기화하는데 실패했습니다."),
+				TEXT("Core를 초기화하는데 실패했습니다. \n: Direct3D를 초기화하는데 실패했습니다."),
+				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
+			return false;
+		}
+
+		_renderer = std::shared_ptr<Renderer>(new Renderer);
+		if (!_renderer || !_renderer->Init(_d3d->_device))
+		{
+			MessageBox(
+				0,
+				TEXT("Core를 초기화하는데 실패했습니다. \n: Renderer를 초기화하는데 실패했습니다."),
 				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
 			return false;
 		}
@@ -71,6 +82,9 @@ namespace meltshine
 
 	void Core::Run()
 	{
+		_renderer->Clear(D3DCOLOR_XRGB(0, 0, 0), D3DCLEAR_TARGET);
+		_renderer->DrawSprite(0, 0, 0xFFFFFFFF);
+		_renderer->Render();
 	}
 
 	void Core::GetWinSize(int& w, int& h) const
