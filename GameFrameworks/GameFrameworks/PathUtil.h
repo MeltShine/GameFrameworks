@@ -9,10 +9,11 @@ namespace meltshine
 	public:
 		static void Init();
 		static const TCHAR* GetDirectory();
-		static const TCHAR* Combine(const TCHAR* filename);
+		static const TCHAR* GetBinaryDirectory();
 
 	private:
 		static TCHAR _root_directory[MAX_PATH];
+		static TCHAR _binary_directory[MAX_PATH];
 	};
 }
 #endif // !__MELTSHINE_PATHUTIL_H__
