@@ -2,7 +2,7 @@
 
 namespace meltshine
 {
-	TCHAR PathUtil::_root_path[MAX_PATH] = {};
+	TCHAR PathUtil::_root_directory[MAX_PATH] = {};
 
 	void PathUtil::Init()
 	{
@@ -19,12 +19,19 @@ namespace meltshine
 			--pos;
 		}
 		// 문자열을 복사할 때 이스케이프 문자 '\\'도 포함시키기 위해 '1'을 더해준다.
-		memcpy(_root_path, exe_path, pos + 1);
+		memcpy(_root_directory, exe_path, pos + 1);
 	}
 
-	const TCHAR* PathUtil::GetRoot()
+	const TCHAR* PathUtil::GetDirectory()
 	{
-		return _root_path;
+		return _root_directory;
+	}
+
+	const TCHAR* PathUtil::Combine(const TCHAR* filename)
+	{
+		TCHAR combined[MAX_PATH] = {};
+		wsprintf(combined, TEXT("%s%s"), _root_directory, filename);
+		return combined;
 	}
 
 }
