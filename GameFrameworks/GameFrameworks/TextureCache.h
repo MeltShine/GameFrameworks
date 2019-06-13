@@ -12,8 +12,8 @@ namespace meltshine
 		~TextureCache();
 
 		bool Init(LPDIRECT3DDEVICE9 dev);
-		void AddTexture(std::string key, LPDIRECT3DTEXTURE9 d3d_texture);
-		void AddTexture(
+		bool AddTexture(std::string key, LPDIRECT3DTEXTURE9 d3d_texture);
+		bool AddTexture(
 			std::string key,
 			const TCHAR* filename, 
 			const UINT& width = D3DX_DEFAULT_NONPOW2,

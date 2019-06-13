@@ -3,6 +3,7 @@
 namespace meltshine
 {
 	TextureCache::TextureCache()
+		: _d3d_device(nullptr)
 	{
 	}
 
@@ -22,17 +23,18 @@ namespace meltshine
 		return true;
 	}
 
-	void TextureCache::AddTexture(std::string key, LPDIRECT3DTEXTURE9 d3d_texture)
+	bool TextureCache::AddTexture(std::string key, LPDIRECT3DTEXTURE9 d3d_texture)
 	{
-		if (HasTexture(key))
+		if (HasTexture(key) || d3d_texture == nullptr)
 		{
-			return;
+			return false;
 		}
 
 		_d3d_textures.emplace(key, d3d_texture);
+		return true;
 	}
 
-	void TextureCache::AddTexture(
+	bool TextureCache::AddTexture(
 		std::string key, 
 		const TCHAR* filename, 
 		const UINT& width,
@@ -41,6 +43,11 @@ namespace meltshine
 		const D3DCOLOR& colorkey,
 		const UINT& mip_levels)
 	{
+		if (HasTexture(key))
+		{
+			return false;
+		}
+
 		LPDIRECT3DTEXTURE9 d3d_texture = nullptr;
 		if (FAILED(D3DXCreateTextureFromFileEx(
 			_d3d_device,
@@ -58,10 +65,11 @@ namespace meltshine
 			nullptr,
 			&d3d_texture)))
 		{
-			return;
+			return false;
 		}
 
-		AddTexture(key, d3d_texture);
+		_d3d_textures.emplace(key, d3d_texture);
+		return true;
 	}
 
 	bool TextureCache::HasTexture(const std::string& key) const
@@ -81,6 +89,13 @@ namespace meltshine
 
 	void TextureCache::RemoveTexture(const std::string& key)
 	{
+		auto& d3d_texture = _d3d_textures.at(key);
+		if (d3d_texture != nullptr)
+		{
+			d3d_texture->Release();
+			d3d_texture = nullptr;
+		}
+
 		_d3d_textures.erase(key);
 	}
 
@@ -88,7 +103,12 @@ namespace meltshine
 	{
 		for (auto& pair : _d3d_textures)
 		{
-			pair.second->Release();
+			auto& d3d_texture = pair.second;
+			if (d3d_texture != nullptr)
+			{
+				d3d_texture->Release();
+				d3d_texture = nullptr;
+			}
 		}
 		_d3d_textures.clear();
 	}
