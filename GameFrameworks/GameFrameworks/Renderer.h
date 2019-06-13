@@ -36,6 +36,12 @@ namespace meltshine
 			const LPRECT rect,
 			const DWORD& format,
 			const D3DCOLOR& color);
+		void DrawString(
+			const LPD3DXFONT font,
+			const std::wstring& wstr,
+			const LPRECT rect,
+			const DWORD& format,
+			const D3DCOLOR& color);
 		void Render();
 
 	private:

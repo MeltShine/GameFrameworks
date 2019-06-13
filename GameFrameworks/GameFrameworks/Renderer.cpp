@@ -149,6 +149,21 @@ namespace meltshine
 		_drawing_tasks.emplace_back(std::move(draw_string));
 	}
 
+	void Renderer::DrawString(
+		const LPD3DXFONT font,
+		const std::wstring& wstr,
+		const LPRECT rect,
+		const DWORD& format,
+		const D3DCOLOR& color)
+	{
+		auto draw_string = [&]()
+		{
+			font->DrawTextW(_d3dx_sprite, wstr.c_str(), wstr.length(), rect, format, color);
+		};
+
+		_drawing_tasks.emplace_back(std::move(draw_string));
+	}
+
 	void Renderer::Render()
 	{
 		_d3d_device->BeginScene();
