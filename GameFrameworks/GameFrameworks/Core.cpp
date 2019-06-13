@@ -4,6 +4,7 @@
 #include "ConfigUtil.h"
 #include "Direct3D.h"
 #include "Renderer.h"
+#include "TextureCache.h"
 
 //#ifdef _DEBUG
 //#define CRTDBG_MAP_ALLOC
@@ -73,6 +74,16 @@ namespace meltshine
 			MessageBox(
 				0,
 				TEXT("Core를 초기화하는데 실패했습니다. \n: Renderer를 초기화하는데 실패했습니다."),
+				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
+			return false;
+		}
+
+		_texture_cache = std::shared_ptr<TextureCache>(new TextureCache);
+		if (!_texture_cache || !_texture_cache->Init(_d3d->_device))
+		{
+			MessageBox(
+				0,
+				TEXT("Core를 초기화하는데 실패했습니다. \n: TextureCache를 초기화하는데 실패했습니다."),
 				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
 			return false;
 		}

@@ -36,6 +36,9 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="TextureCache.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -54,6 +57,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureCache.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

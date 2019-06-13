@@ -159,6 +159,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PathUtil.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="TextureCache.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Direct3D.h" />
     <ClInclude Include="PathUtil.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="TextureCache.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
