@@ -4,6 +4,7 @@
 namespace meltshine
 {
 	Component::Component()
+		: _hash_of_name()
 	{
 	}
 
