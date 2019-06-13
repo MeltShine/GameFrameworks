@@ -4,6 +4,7 @@
 #include "ConfigUtil.h"
 #include "Direct3D.h"
 #include "Renderer.h"
+#include "FontCache.h"
 
 //#ifdef _DEBUG
 //#define CRTDBG_MAP_ALLOC
@@ -77,13 +78,26 @@ namespace meltshine
 			return false;
 		}
 
+		_font_cache = std::shared_ptr<FontCache>(new FontCache);
+		if (!_font_cache || !_font_cache->Init(_d3d->_device))
+		{
+			MessageBox(
+				0,
+				TEXT("Core를 초기화하는데 실패했습니다. \n: FontCache를 초기화하는데 실패했습니다."),
+				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
+			return false;
+		}
+
 		return true;
 	}
 
 	void Core::Run()
 	{
 		_renderer->Clear(D3DCOLOR_XRGB(0, 0, 0), D3DCLEAR_TARGET);
-		_renderer->DrawSprite(0, 0, 0xFFFFFFFF);
+		//_renderer->DrawSprite(0, 0, 0xFFFFFFFF);
+		RECT rect = { 0,0,0,0 };
+		std::string str = "HelloWorld";
+		_renderer->DrawString(_font_cache->GetFont("Default"), str, &rect, DT_NOCLIP, D3DCOLOR_ARGB(255,255, 255, 255));
 		_renderer->Render();
 	}
 

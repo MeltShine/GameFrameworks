@@ -6,6 +6,7 @@ namespace meltshine
 {
 	class Direct3D;
 	class Renderer;
+	class FontCache;
 	class Core : public std::enable_shared_from_this<Core>
 	{
 	private:
@@ -28,12 +29,15 @@ namespace meltshine
 
 		std::shared_ptr<Direct3D> GetDirect3D() const { return _d3d; }
 		std::shared_ptr<Renderer> GetRenderer() const { return _renderer; }
+		std::shared_ptr<FontCache> GetFontCache() const { return _font_cache; }
 
 	private:
 		HWND _window;
 		HINSTANCE _instance;
 		std::shared_ptr<Direct3D> _d3d;
 		std::shared_ptr<Renderer> _renderer;
+		std::shared_ptr<FontCache> _font_cache;
+
 	};
 }
 #endif // !__MELTSHINE_CORE_H__

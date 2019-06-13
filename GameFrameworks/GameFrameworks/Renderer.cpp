@@ -143,7 +143,9 @@ namespace meltshine
 	{
 		auto draw_string = [&]()
 		{
+			_d3dx_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 			font->DrawTextA(_d3dx_sprite, str.c_str(), str.length(), rect, format, color);
+			_d3dx_sprite->End();
 		};
 
 		_drawing_tasks.emplace_back(std::move(draw_string));
@@ -158,7 +160,9 @@ namespace meltshine
 	{
 		auto draw_string = [&]()
 		{
+			_d3dx_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 			font->DrawTextW(_d3dx_sprite, wstr.c_str(), wstr.length(), rect, format, color);
+			_d3dx_sprite->End();
 		};
 
 		_drawing_tasks.emplace_back(std::move(draw_string));
