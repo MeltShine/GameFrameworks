@@ -4,6 +4,7 @@
 #include "ConfigUtil.h"
 #include "Direct3D.h"
 #include "Renderer.h"
+#include "ObjectManager.h"
 
 //#ifdef _DEBUG
 //#define CRTDBG_MAP_ALLOC
@@ -73,6 +74,16 @@ namespace meltshine
 			MessageBox(
 				0,
 				TEXT("Core를 초기화하는데 실패했습니다. \n: Renderer를 초기화하는데 실패했습니다."),
+				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
+			return false;
+		}
+
+		_obj_mgr = std::shared_ptr<ObjectManager>(new ObjectManager);
+		if (!_obj_mgr || !_obj_mgr->Init(shared_from_this()))
+		{
+			MessageBox(
+				0,
+				TEXT("Core를 초기화하는데 실패했습니다. \n: ObjectManager를 초기화하는데 실패했습니다."),
 				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
 			return false;
 		}
