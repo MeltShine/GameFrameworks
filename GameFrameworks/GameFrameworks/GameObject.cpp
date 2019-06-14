@@ -46,6 +46,8 @@ namespace meltshine
 			return;
 		}
 
+		// TODO: SetScene(_scene_ctrl->GetCurrentScene());
+
 		for (auto& component : _components)
 		{
 			component->OnEnter();
@@ -198,19 +200,6 @@ namespace meltshine
 		_hash_of_name = StrToHash(name);
 	}
 
-	void GameObject::SetScene(std::shared_ptr<Scene> scene)
-	{
-		if (_scene.lock() == scene)
-		{
-			return;
-		}
-		_scene = scene;
-		for (auto& child : _children)
-		{
-			child->SetScene(scene);
-		}
-	}
-
 	void GameObject::AddChild(std::shared_ptr<GameObject> obj)
 	{
 		if (obj->GetParent() != nullptr)
@@ -220,7 +209,6 @@ namespace meltshine
 		_children.push_back(obj);
 		obj->_running = true;
 		obj->SetParent(shared_from_this());
-		obj->SetScene(GetScene());
 		if (_running)
 		{
 			obj->OnEnter();

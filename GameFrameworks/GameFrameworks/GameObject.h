@@ -32,7 +32,7 @@ namespace meltshine
 		void SetDepth(int depth) { _depth = depth; };
 		void SetVisible(bool is_visible) { _visible = is_visible; };
 		void SetParent(std::shared_ptr<GameObject> obj) { _parent = obj; };
-		void SetScene(std::shared_ptr<Scene> scene);
+		void SetScene(std::shared_ptr<Scene> scene) { _scene = scene; };
 		void SetCore(std::shared_ptr<Core> core) { _core = core; };
 		void SetDirect3D(std::shared_ptr<Direct3D> d3d) { _d3d = d3d; };
 		void SetRenderer(std::shared_ptr<Renderer> renderer) { _renderer = renderer; };
