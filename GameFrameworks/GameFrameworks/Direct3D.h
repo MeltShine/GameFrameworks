@@ -13,7 +13,7 @@ namespace meltshine
 		bool Init(HWND hwnd, BOOL windowed, BOOL vsynced);
 
 		LPDIRECT3D9 GetD3D() const { return _d3d; }
-		LPDIRECT3DDEVICE9 GetDevice() const { _device; }
+		LPDIRECT3DDEVICE9 GetDevice() const { return _device; }
 		D3DPRESENT_PARAMETERS GetPresentParameters() const { return _d3dpp; }
 		BOOL IsVSynced() const { return _vsynced; }
 		BOOL IsWindowed() const { return _d3dpp.Windowed; }
