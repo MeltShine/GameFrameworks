@@ -162,6 +162,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PathUtil.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PathUtil.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Component.inl" />

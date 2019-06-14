@@ -8,8 +8,10 @@ namespace meltshine
 	class Core;
 	class Direct3D;
 	class Renderer;
-	class Component;
+	class ObjectManager;
 	class Scene;
+	class Component;
+	class Transform;
 	class GameObject : public std::enable_shared_from_this<GameObject>
 	{
 	public:
@@ -36,6 +38,7 @@ namespace meltshine
 		void SetCore(std::shared_ptr<Core> core) { _core = core; };
 		void SetDirect3D(std::shared_ptr<Direct3D> d3d) { _d3d = d3d; };
 		void SetRenderer(std::shared_ptr<Renderer> renderer) { _renderer = renderer; };
+		void SetObjectManager(std::shared_ptr<ObjectManager> obj_mgr) { _obj_mgr = obj_mgr; };
 
 		// Getters
 		std::string GetName() const { return _name; };
@@ -48,6 +51,8 @@ namespace meltshine
 		std::shared_ptr<Core>		GetCore() const { return _core.lock(); };
 		std::shared_ptr<Direct3D>	GetDirect3D() const { return _d3d.lock(); };
 		std::shared_ptr<Renderer>	GetRenderer() const { return _renderer.lock(); };
+		std::shared_ptr<ObjectManager> GetObjectManager() const { return _obj_mgr.lock(); };
+		std::shared_ptr<Transform>  GetTransform() const { return _transform; };
 
 		// Children
 		void AddChild(std::shared_ptr<GameObject> obj);
@@ -93,10 +98,12 @@ namespace meltshine
 		std::weak_ptr<Scene>		_scene;
 		std::vector<std::shared_ptr<GameObject>> _children;
 		std::vector<std::shared_ptr<Component>>  _components;
+		std::shared_ptr<Transform> _transform;
 
 		std::weak_ptr<Core> _core;
 		std::weak_ptr<Direct3D> _d3d;
 		std::weak_ptr<Renderer> _renderer;
+		std::weak_ptr<ObjectManager> _obj_mgr;
 
 	};
 }

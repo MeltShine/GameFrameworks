@@ -2,8 +2,13 @@
 
 #include <algorithm>
 
-#include "Component.h"
+// Managers
 #include "Core.h"
+#include "ObjectManager.h"
+
+// Components
+#include "Component.h"
+#include "Transform.h"
 
 namespace meltshine
 {
@@ -35,7 +40,14 @@ namespace meltshine
 		SetCore(core);
 		SetDirect3D(core->GetDirect3D());
 		SetRenderer(core->GetRenderer());
+		SetObjectManager(core->GetObjectManager());
 
+		auto transform = GetObjectManager()->CreateComponent<Transform>();
+		if (transform == nullptr)
+		{
+			return false;
+		}
+		AddComponent(transform);
 		return true;
 	}
 
