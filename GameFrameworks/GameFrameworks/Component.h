@@ -4,6 +4,7 @@
 #include <string>
 namespace meltshine
 {
+	class Core;
 	class GameObject;
 	class Component
 	{
@@ -11,6 +12,7 @@ namespace meltshine
 		Component();
 		~Component();
 
+		virtual bool Init(std::shared_ptr<Core> core) = 0;
 		virtual void OnEnter() = 0;
 		virtual void OnExit()  = 0;
 		virtual void Update(const float& dt) = 0;
