@@ -2,6 +2,7 @@
 
 // 게임 오브젝트
 #include "GameObject.h"
+#include "Scene.h"
 
 // 컴포넌트
 #include "Component.h"
@@ -33,6 +34,16 @@ namespace meltshine
 		{
 			obj->SetName("Empty Object");
 			return obj;
+		}
+		return nullptr;
+	}
+
+	std::shared_ptr<Scene> ObjectManager::CreateEmptyScene()
+	{
+		auto scene = std::shared_ptr<Scene>(new Scene);
+		if (scene && scene->Init(_core.lock()))
+		{
+			return scene;
 		}
 		return nullptr;
 	}

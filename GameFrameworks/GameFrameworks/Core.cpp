@@ -5,14 +5,16 @@
 #include "Direct3D.h"
 #include "Renderer.h"
 #include "ObjectManager.h"
+#include "SceneController.h"
+#include "Scene.h"
 
-//#ifdef _DEBUG
-//#define CRTDBG_MAP_ALLOC
-//#include <crtdbg.h>
-//// #include <new.h>등으로 operator new나 malloc을 
-//// Derived해서 정의 한 경우, 사용 할 수 없다.
-//#define new new( _NORMAL_BLOCK, __FILE__, __LINE__ )
-//#endif
+#ifdef _DEBUG
+#define CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+// #include <new.h>등으로 operator new나 malloc을 
+// Derived해서 정의 한 경우, 사용 할 수 없다.
+#define new new( _NORMAL_BLOCK, __FILE__, __LINE__ )
+#endif
 
 namespace meltshine
 {
@@ -37,7 +39,7 @@ namespace meltshine
 
 	bool Core::Init(HWND window, HINSTANCE instance)
 	{
-		//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 		if (!window || !instance)
 		{
@@ -88,13 +90,30 @@ namespace meltshine
 			return false;
 		}
 
+		_sc_ctrl = std::shared_ptr<SceneController>(new SceneController);
+		if (!_sc_ctrl)
+		{
+			MessageBox(
+				0,
+				TEXT("Core를 초기화하는데 실패했습니다. \n: SceneController를 생성하는데 실패했습니다."),
+				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
+			return false;
+		}
+
 		return true;
 	}
 
 	void Core::Run()
 	{
-		_renderer->Clear(D3DCOLOR_XRGB(0, 0, 0), D3DCLEAR_TARGET);
-		_renderer->DrawSprite(0, 0, 0xFFFFFFFF);
+		auto scene = _sc_ctrl->GetCurrentScene();
+		scene->Update(0.0f);
+		scene->LateUpdate();
+
+		// 장면 내 카메라 수 만큼 아래 과정을 반복한다.
+		scene->PreRender();
+		scene->Render();
+		scene->PostRender();
+		scene->RenderImage();
 		_renderer->Render();
 	}
 

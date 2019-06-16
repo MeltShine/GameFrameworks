@@ -6,6 +6,8 @@ namespace meltshine
 {
 	class Core;
 	class GameObject;
+	class Scene;
+
 	// Component
 	class Component;
 	class Transform;
@@ -22,6 +24,17 @@ namespace meltshine
 
 		// 게임 오브젝트
 		std::shared_ptr<GameObject> CreateEmptyObject();
+		std::shared_ptr<Scene>	CreateEmptyScene();
+		template <typename SceneTy>
+		std::shared_ptr<SceneTy> CreateSceneAs()
+		{
+			auto scene = std::shared_ptr<SceneTy>(new SceneTy);
+			if (scene&&scene->Init(_core.lock()))
+			{
+				return scene;
+			}
+			return nullptr;
+		}
 
 		// Prefeb
 		void InsertOrigin(std::string key, std::shared_ptr<GameObject> obj);

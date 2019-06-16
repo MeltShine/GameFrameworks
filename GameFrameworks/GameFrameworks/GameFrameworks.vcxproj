@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -156,12 +156,15 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ConfigUtil.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="DefaultScene.cpp" />
     <ClCompile Include="Direct3D.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PathUtil.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneController.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,11 +172,14 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="ConfigUtil.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="DefaultScene.h" />
     <ClInclude Include="Direct3D.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PathUtil.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneController.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>

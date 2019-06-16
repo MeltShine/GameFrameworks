@@ -41,7 +41,7 @@ namespace meltshine
 		SetDirect3D(core->GetDirect3D());
 		SetRenderer(core->GetRenderer());
 		SetObjectManager(core->GetObjectManager());
-
+		SetSceneController(core->GetSceneController());
 		auto transform = GetObjectManager()->CreateComponent<Transform>();
 		if (transform == nullptr)
 		{
@@ -57,8 +57,6 @@ namespace meltshine
 		{
 			return;
 		}
-
-		// TODO: SetScene(_scene_ctrl->GetCurrentScene());
 
 		for (auto& component : _components)
 		{
