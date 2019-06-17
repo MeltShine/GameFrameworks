@@ -32,7 +32,7 @@ namespace meltshine
 	}
 
 #ifdef _UNICODE
-	std::wstring ConfigUtil::ReadString(const TCHAR* section, const TCHAR* key, const size_t& size)
+	std::wstring ConfigUtil::ReadString(const TCHAR* section, const TCHAR* key, const DWORD& size)
 	{
 		std::wstring str(size, 0);
 		GetPrivateProfileString(section, key, 0, &str[0], size, _config_file_path);
@@ -40,7 +40,7 @@ namespace meltshine
 		return str;
 	}
 #else
-	std::string ConfigUtil::ReadString(const TCHAR* section, const TCHAR* key, const size_t& size)
+	std::string ConfigUtil::ReadString(const TCHAR* section, const TCHAR* key, const DWORD& size)
 	{
 		std::string str(size, 0);
 		GetPrivateProfileString(section, key, 0, &str[0], size, _config_file_path);
