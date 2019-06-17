@@ -1,5 +1,7 @@
 #include "Renderer.h"
 
+#include <memory>
+
 #include "PathUtil.h"
 
 namespace meltshine
@@ -72,12 +74,11 @@ namespace meltshine
 		return true;
 	}
 
-	void Renderer::Clear(D3DCOLOR color, DWORD flag)
+	void Renderer::Clear(const D3DCOLOR& color, const DWORD& flag)
 	{
 		auto clear = [&]() {
 			_d3d_device->Clear(0, nullptr, flag, color, 1.0f, 0);
 		};
-
 		_drawing_tasks.emplace_back(std::move(clear));
 	}
 

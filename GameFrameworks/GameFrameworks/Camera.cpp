@@ -13,8 +13,8 @@ namespace meltshine
 		: _aspect_ratio()
 		, _cam_type(PERSPECTIVE)
 		, _changed_value_of_projection(false)
-		, _clear_color(0xFF000000)
-		, _clear_flags(D3DCLEAR_ZBUFFER)
+		, _clear_color(0xFF0000FF)
+		, _clear_flags(D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL)
 		, _depth(0)
 		, _fov_angle(D3DXToRadian(45))
 		, _far_z(1000.f)
@@ -25,6 +25,12 @@ namespace meltshine
 		, _surface_of_render_texture(nullptr)
 		, _masking_tags(0)
 	{
+		_vp.X = 0;
+		_vp.Y = 0;
+		_vp.Width = 0;
+		_vp.Height = 0;
+		_vp.MinZ = 0.0f;
+		_vp.MaxZ = 1.0f;
 	}
 
 	Camera::~Camera()
@@ -64,8 +70,14 @@ namespace meltshine
 
 	void Camera::OnExit()
 	{
+		auto scene = GetScene();
+		if (scene == nullptr)
+		{
+			return;
+		}
+
 		// Scene에서 제거
-		auto& cameras = GetScene()->_cameras;
+		auto& cameras = scene->_cameras;
 		auto it = cameras.begin();
 		auto end = cameras.end();
 		for (; it != end; ++it)

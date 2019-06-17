@@ -15,7 +15,7 @@ namespace meltshine
 		~Renderer();
 		
 		bool Init(LPDIRECT3DDEVICE9 dev);
-		void Clear(D3DCOLOR color, DWORD flag);
+		void Clear(const D3DCOLOR& color, const DWORD& flag);
 		void DrawLine(
 			const D3DXVECTOR2* vertics,
 			const DWORD& vertex_count,
