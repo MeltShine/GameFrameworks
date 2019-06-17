@@ -64,7 +64,7 @@ namespace meltshine
 		// Scene¿¡ µî·Ï
 		auto scene = GetScene();
 		scene->_cameras.emplace_back(std::static_pointer_cast<Camera>(shared_from_this()));
-		_depth = scene->_cameras.size() - 1;
+		_depth = (int)scene->_cameras.size() - 1;
 		scene->_dirty_cameras = true;
 	}
 
