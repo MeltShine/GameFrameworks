@@ -164,6 +164,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PathUtil.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="TextureCache.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneController.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PathUtil.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="TextureCache.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneController.h" />
     <ClInclude Include="Timer.h" />

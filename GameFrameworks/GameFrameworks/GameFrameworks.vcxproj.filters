@@ -75,6 +75,9 @@
     <ClCompile Include="Timer.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="TextureCache.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DefaultScene.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureCache.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
