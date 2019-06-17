@@ -78,6 +78,9 @@
     <ClCompile Include="TextureCache.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="FontCache.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DefaultScene.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="TextureCache.h">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="FontCache.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

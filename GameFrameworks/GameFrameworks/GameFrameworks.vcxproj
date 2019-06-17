@@ -160,6 +160,7 @@
     <ClCompile Include="DefaultScene.cpp" />
     <ClCompile Include="Direct3D.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="FontCache.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PathUtil.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Direct3D.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="FontCache.h" />
     <ClInclude Include="PathUtil.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="TextureCache.h" />

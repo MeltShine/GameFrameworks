@@ -10,6 +10,7 @@ namespace meltshine
 	class SceneController;
 	class Timer;
 	class TextureCache;
+	class FontCache;
 	class Core : public std::enable_shared_from_this<Core>
 	{
 	private:
@@ -36,6 +37,7 @@ namespace meltshine
 		std::shared_ptr<SceneController> GetSceneController() const { return _sc_ctrl; };
 		std::shared_ptr<Timer> GetTimer() const { return _timer; };
 		std::shared_ptr<TextureCache> GetTextureCache() const { return _texture_cache; }
+		std::shared_ptr<FontCache> GetFontCache() const { return _font_cache; }
 
 	private:
 		HWND _window;
@@ -45,8 +47,9 @@ namespace meltshine
 		std::shared_ptr<ObjectManager> _obj_mgr;
 		std::shared_ptr<SceneController> _sc_ctrl;
 		std::shared_ptr<Timer> _timer;
-
 		std::shared_ptr<TextureCache> _texture_cache;
+		std::shared_ptr<FontCache> _font_cache;
+
 	};
 }
 #endif // !__MELTSHINE_CORE_H__

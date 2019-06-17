@@ -9,6 +9,7 @@
 #include "Scene.h"
 #include "Timer.h"
 #include "TextureCache.h"
+#include "FontCache.h"
 
 #ifdef _DEBUG
 #define CRTDBG_MAP_ALLOC
@@ -118,6 +119,16 @@ namespace meltshine
 			MessageBox(
 				0,
 				TEXT("Core를 초기화하는데 실패했습니다. \n: TextureCache를 초기화하는데 실패했습니다."),
+				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
+			return false;
+		}
+
+		_font_cache = std::shared_ptr<FontCache>(new FontCache);
+		if (!_font_cache || !_font_cache->Init(_d3d->_device))
+		{
+			MessageBox(
+				0,
+				TEXT("Core를 초기화하는데 실패했습니다. \n: FontCache를 초기화하는데 실패했습니다."),
 				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
 			return false;
 		}
