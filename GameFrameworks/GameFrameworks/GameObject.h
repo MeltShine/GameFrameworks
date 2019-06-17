@@ -11,8 +11,10 @@ namespace meltshine
 	class ObjectManager;
 	class Scene;
 	class SceneController;
+	class AudioPlayer;
 	class Component;
 	class Transform;
+	class Camera;
 	class GameObject : public std::enable_shared_from_this<GameObject>
 	{
 	protected:
@@ -41,6 +43,7 @@ namespace meltshine
 		void SetRenderer(std::shared_ptr<Renderer> renderer) { _renderer = renderer; };
 		void SetObjectManager(std::shared_ptr<ObjectManager> obj_mgr) { _obj_mgr = obj_mgr; };
 		void SetSceneController(std::shared_ptr<SceneController> sc_ctrl) { _sc_ctrl = sc_ctrl; };
+		void SetAudioPlayer(std::shared_ptr<AudioPlayer> audio_player) { _audio_player = audio_player; };
 
 		// Getters
 		std::string GetName() const { return _name; };
@@ -55,6 +58,9 @@ namespace meltshine
 		std::shared_ptr<ObjectManager> GetObjectManager() const { return _obj_mgr.lock(); };
 		std::shared_ptr<Transform>  GetTransform() const { return _transform; };
 		std::shared_ptr<SceneController> GetSceneController() const { return _sc_ctrl.lock(); };
+		std::shared_ptr<AudioPlayer> GetAudioPlayer() const { return _audio_player.lock(); };
+		std::shared_ptr<Camera> GetVisitingCamera() const;
+		std::shared_ptr<Camera> GetDefaultCamera() const;
 
 		// Children
 		virtual void AddChild(std::shared_ptr<GameObject> obj);
@@ -106,6 +112,7 @@ namespace meltshine
 		std::weak_ptr<Renderer> _renderer;
 		std::weak_ptr<ObjectManager> _obj_mgr;
 		std::weak_ptr<SceneController> _sc_ctrl;
+		std::weak_ptr<AudioPlayer> _audio_player;
 
 		friend class Scene;
 		friend class ObjectManager;

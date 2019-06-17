@@ -5,10 +5,13 @@
 // Managers
 #include "Core.h"
 #include "ObjectManager.h"
+#include "SceneController.h"
+#include "Scene.h"
 
 // Components
 #include "Component.h"
 #include "Transform.h"
+#include "Camera.h"
 
 namespace meltshine
 {
@@ -130,8 +133,7 @@ namespace meltshine
 
 	void GameObject::PreRender()
 	{
-		// TODO: 이 곳에서 카메라의 그리기 대상으로 해당되는지 확인하는 코드를 작성하세요.
-		if (!_running || !_visible)
+		if (!_running || !_visible || GetVisitingCamera()->GetMaskingTags() & _tag)
 		{
 			return;
 		}
@@ -149,9 +151,7 @@ namespace meltshine
 
 	void GameObject::Render()
 	{
-		// TODO: 이 곳에서 카메라의 그리기 대상으로 해당되는지 확인하는 코드를 작성하세요.
-		// GetScene()->GetVisitingCamera()->CheckMaskingTarget(_tag);
-		if (!_running || !_visible)
+		if (!_running || !_visible || GetVisitingCamera()->GetMaskingTags() & _tag)
 		{
 			return;
 		}
@@ -169,8 +169,7 @@ namespace meltshine
 
 	void GameObject::PostRender()
 	{
-		// TODO: 이 곳에서 카메라의 그리기 대상으로 해당되는지 확인하는 코드를 작성하세요.
-		if (!_running || !_visible)
+		if (!_running || !_visible || GetVisitingCamera()->GetMaskingTags() & _tag)
 		{
 			return;
 		}
@@ -188,7 +187,11 @@ namespace meltshine
 
 	void GameObject::RenderImage()
 	{
-		// TODO: 이 곳에서 카메라의 그리기 대상으로 해당되는지 확인하는 코드를 작성하세요.
+		if (!_running || !_visible || GetVisitingCamera()->GetMaskingTags() & _tag)
+		{
+			return;
+		}
+
 		for (auto& component : _components)
 		{
 			component->RenderImage();
@@ -209,6 +212,16 @@ namespace meltshine
 
 		_name = std::move(name);
 		_hash_of_name = StrToHash(name);
+	}
+
+	std::shared_ptr<Camera> GameObject::GetVisitingCamera() const
+	{
+		return GetSceneController()->GetCurrentScene()->GetVisitingCamera();
+	}
+
+	std::shared_ptr<Camera> GameObject::GetDefaultCamera() const
+	{
+		return GetSceneController()->GetCurrentScene()->GetDefaultCamera();
 	}
 
 	void GameObject::AddChild(std::shared_ptr<GameObject> obj)
