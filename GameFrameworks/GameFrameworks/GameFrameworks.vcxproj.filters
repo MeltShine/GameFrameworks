@@ -76,7 +76,7 @@
       <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="TextureCache.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,7 +126,7 @@
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="TextureCache.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
