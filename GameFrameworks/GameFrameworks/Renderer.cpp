@@ -76,93 +76,10 @@ namespace meltshine
 
 	void Renderer::Clear(const D3DCOLOR& color, const DWORD& flag)
 	{
-		auto clear = [&]() {
+		auto clear = [=]() {
 			_d3d_device->Clear(0, nullptr, flag, color, 1.0f, 0);
 		};
 		_drawing_tasks.emplace_back(std::move(clear));
-	}
-
-	void Renderer::DrawLine(const D3DXVECTOR2* vertics, const DWORD& vertex_count, const D3DCOLOR& color, const FLOAT& width)
-	{
-		auto draw_line = [&]() {
-			if (_d3dx_line->GetWidth() != width)
-			{
-				_d3dx_line->SetWidth(width);
-			}
-			_d3dx_line->Begin();
-			_d3dx_line->Draw(vertics, vertex_count, color);
-			_d3dx_line->End();
-		};
-
-		_drawing_tasks.emplace_back(std::move(draw_line));
-	}
-
-	void Renderer::DrawLine(
-		const D3DXVECTOR3* vertics,
-		const DWORD& vertex_count,
-		const D3DCOLOR& color,
-		const FLOAT& width,
-		const D3DXMATRIX* transform)
-	{
-		auto draw_line = [&]() {
-			if (_d3dx_line->GetWidth() != width)
-			{
-				_d3dx_line->SetWidth(width);
-			}
-			_d3dx_line->Begin();
-			if (transform)
-			{
-				_d3dx_line->DrawTransform(vertics, vertex_count, transform, color);
-			}
-			_d3dx_line->End();
-		};
-
-		_drawing_tasks.emplace_back(std::move(draw_line));
-	}
-
-	void Renderer::DrawSprite(const LPDIRECT3DTEXTURE9 texture, const D3DXMATRIX* transform, const D3DCOLOR& color)
-	{
-		auto draw_sprite = [&]() {
-			_d3dx_sprite->Begin(D3DXSPRITE_ALPHABLEND);
-			if (transform != nullptr)
-			{
-				_d3dx_sprite->SetTransform(transform);
-			}
-			_d3dx_sprite->Draw(texture ? texture : _d3d_test_texture, nullptr, nullptr, nullptr, color);
-			_d3dx_sprite->End();
-		};
-
-		_drawing_tasks.emplace_back(std::move(draw_sprite));
-	}
-
-	void Renderer::DrawString(
-		const LPD3DXFONT font,
-		const std::string& str, 
-		const LPRECT rect,
-		const DWORD& format, 
-		const D3DCOLOR& color)
-	{
-		auto draw_string = [&]()
-		{
-			font->DrawTextA(_d3dx_sprite, str.c_str(), (INT)str.length(), rect, format, color);
-		};
-
-		_drawing_tasks.emplace_back(std::move(draw_string));
-	}
-
-	void Renderer::DrawString(
-		const LPD3DXFONT font,
-		const std::wstring& wstr,
-		const LPRECT rect,
-		const DWORD& format,
-		const D3DCOLOR& color)
-	{
-		auto draw_string = [&]()
-		{
-			font->DrawTextW(_d3dx_sprite, wstr.c_str(), (INT)wstr.length(), rect, format, color);
-		};
-
-		_drawing_tasks.emplace_back(std::move(draw_string));
 	}
 
 	void Renderer::BeginScene()
@@ -185,6 +102,100 @@ namespace meltshine
 		_drawing_tasks.emplace_back(std::move(end_scene));
 	}
 
+	void Renderer::DrawLine(
+		const std::vector<D3DXVECTOR2>& vertics, 
+		const D3DCOLOR& color,
+		const FLOAT& width)
+	{
+		auto draw_line = [&, vertics, color, width]() {
+			if (_d3dx_line->GetWidth() != width)
+			{
+				_d3dx_line->SetWidth(width);
+			}
+			_d3dx_line->Begin();
+			_d3dx_line->Draw(vertics.data(), vertics.size(), color);
+			_d3dx_line->End();
+		};
+		_drawing_tasks.emplace_back(std::move(draw_line));
+	}
+
+	void Renderer::DrawLine(
+		const std::vector<D3DXVECTOR3>& vertics,
+		const D3DCOLOR& color, 
+		const FLOAT& width, 
+		const D3DXMATRIX& transform)
+	{
+		auto draw_line = [&, vertics, color, width, transform]() {
+			if (_d3dx_line->GetWidth() != width)
+			{
+				_d3dx_line->SetWidth(width);
+			}
+			_d3dx_line->Begin();
+			_d3dx_line->DrawTransform(vertics.data(), vertics.size(), &transform, color);
+			_d3dx_line->End();
+		};
+		_drawing_tasks.emplace_back(std::move(draw_line));
+	}
+
+	void Renderer::DrawString(
+		const LPD3DXFONT font, 
+		const std::string& text,
+		RECT rect,
+		const D3DCOLOR& color)
+	{
+		auto draw_string = [&, font, text, color, rect]() {
+			_d3dx_sprite->Begin(D3DXSPRITE_ALPHABLEND);
+			font->DrawTextA(_d3dx_sprite, text.c_str(), text.length(), (LPRECT)&rect, 0, color);
+			_d3dx_sprite->End();
+		};
+
+		_drawing_tasks.emplace_back(std::move(draw_string));
+	}
+
+	void Renderer::DrawString(
+		const LPD3DXFONT font,
+		const std::wstring& text,
+		RECT rect,
+		const D3DCOLOR& color)
+	{
+		auto draw_string = [&, font, text, color, rect]() {
+			_d3dx_sprite->Begin(D3DXSPRITE_ALPHABLEND);
+			font->DrawTextW(_d3dx_sprite, text.c_str(), text.length(), (LPRECT)& rect, 0, color);
+			_d3dx_sprite->End();
+		};
+
+		_drawing_tasks.emplace_back(std::move(draw_string));
+	}
+
+	void Renderer::DrawSprite(
+		const LPDIRECT3DTEXTURE9 tex,
+		const D3DXMATRIX& transform,
+		const D3DCOLOR& color)
+	{
+		auto draw_sprite = [&, tex, transform, color]() {
+			_d3dx_sprite->Begin(D3DXSPRITE_ALPHABLEND);
+			_d3dx_sprite->SetTransform(&transform);
+			_d3dx_sprite->Draw(tex, nullptr, nullptr, nullptr, color); 
+			_d3dx_sprite->End();
+		};
+
+		_drawing_tasks.emplace_back(std::move(draw_sprite));
+	}
+	void Renderer::DrawSprite(
+		const LPDIRECT3DTEXTURE9 tex,
+		const RECT& src_rect,
+		const D3DXVECTOR3& center,
+		const D3DXVECTOR3& position, 
+		const D3DCOLOR& color)
+	{
+		auto draw_sprite = [&, tex, src_rect, center, position, color]() {
+			_d3dx_sprite->Begin(D3DXSPRITE_ALPHABLEND);
+			_d3dx_sprite->Draw(tex, &src_rect, &center, &position, color);
+			_d3dx_sprite->End();
+		};
+
+		_drawing_tasks.emplace_back(std::move(draw_sprite));
+	}
 	void Renderer::Render()
 	{
 		for (auto task : _drawing_tasks)
@@ -206,9 +217,14 @@ namespace meltshine
 		_d3d_device->SetRenderTarget(index, surface);
 	}
 
-	void Renderer::SetTransform(D3DTRANSFORMSTATETYPE type, const D3DMATRIX* mat)
+	void Renderer::SetTransform(D3DTRANSFORMSTATETYPE type, const D3DMATRIX& mat)
 	{
-		_d3d_device->SetTransform(type, mat);
+		auto set_transform = [&, type, mat]() {
+			_d3d_device->SetTransform(type, &mat);
+		};
+
+		_drawing_tasks.emplace_back(std::move(set_transform));
+		
 	}
 
 

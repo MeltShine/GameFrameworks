@@ -52,7 +52,7 @@ namespace meltshine
 		void SetViewportSize(UINT w, UINT h);
 		void SetFovAngle(float fov_angle);
 		void SetAspectRatio(float aspect_ratio);
-		void SetClearFlag(DWORD d3dclear_flag) { _clear_flags = d3dclear_flag; };
+		void SetClearFlags(DWORD d3dclear_flag) { _clear_flags = d3dclear_flag; };
 		void SetClearColor(D3DCOLOR color) { _clear_color = color; };
 		void SetEyeUpAt(D3DXVECTOR3 eye, D3DXVECTOR3 up, D3DXVECTOR3 at) { _eye = eye; _up = up; _at = at; };
 		void SetEye(D3DXVECTOR3 eye) { _eye = eye; };

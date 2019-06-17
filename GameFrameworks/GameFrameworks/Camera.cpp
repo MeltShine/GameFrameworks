@@ -132,8 +132,8 @@ namespace meltshine
 
 		renderer->Clear(_clear_color, _clear_flags);
 		renderer->BeginScene();
-		renderer->SetTransform(D3DTS_VIEW, &_look_at);
-		renderer->SetTransform(D3DTS_PROJECTION, &_projection);
+		renderer->SetTransform(D3DTS_VIEW, _look_at);
+		renderer->SetTransform(D3DTS_PROJECTION, _projection);
 	}
 
 	void Camera::Render()

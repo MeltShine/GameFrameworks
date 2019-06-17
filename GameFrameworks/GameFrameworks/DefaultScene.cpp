@@ -1,6 +1,8 @@
 #include "DefaultScene.h"
 #include "ObjectManager.h"
 #include "Camera.h"
+#include "Core.h"
+#include "TestCode.h"
 namespace meltshine
 {
 	DefaultScene::DefaultScene()
@@ -20,8 +22,9 @@ namespace meltshine
 
 		auto cam = GetObjectManager()->CreateCamera();
 		cam->GetComponent<Camera>()->SetClearColor(D3DCOLOR_ARGB(255, 255, 0, 255));
+		cam->GetComponent<Camera>()->SetClearFlags(D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL);
 		AddChild(cam);
-
+		AddComponent(GetObjectManager()->CreateComponent<TestCode>());
 		return true;
 	}
 

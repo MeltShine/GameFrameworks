@@ -2,6 +2,7 @@
 #define __MELTSHINE_RENDERER_H__
 #include <d3dx9.h>
 #include <list>
+#include <vector>
 #include <string>
 #include <functional>
 namespace meltshine
@@ -16,39 +17,44 @@ namespace meltshine
 		
 		bool Init(LPDIRECT3DDEVICE9 dev);
 		void Clear(const D3DCOLOR& color, const DWORD& flag);
+		void BeginScene();
+		void EndScene();
+
 		void DrawLine(
-			const D3DXVECTOR2* vertics,
-			const DWORD& vertex_count,
+			const std::vector<D3DXVECTOR2>& vertics,
 			const D3DCOLOR& color,
 			const FLOAT& width);
-		void DrawLine(const D3DXVECTOR3* vertics,
-			const DWORD& vertex_count,
+		void DrawLine(
+			const std::vector<D3DXVECTOR3>& vertics,
 			const D3DCOLOR& color,
 			const FLOAT& width,
-			const D3DXMATRIX* transform);
-		void DrawSprite(
-			const LPDIRECT3DTEXTURE9 texture,
-			const D3DXMATRIX* transform, 
-			const D3DCOLOR& color);
+			const D3DXMATRIX& transform);
 		void DrawString(
-			const LPD3DXFONT font, 
-			const std::string& str, 
-			const LPRECT rect,
-			const DWORD& format,
+			const LPD3DXFONT font,
+			const std::string& text,
+			RECT rect,
 			const D3DCOLOR& color);
 		void DrawString(
 			const LPD3DXFONT font,
-			const std::wstring& wstr,
-			const LPRECT rect,
-			const DWORD& format,
+			const std::wstring& text,
+			RECT rect,
 			const D3DCOLOR& color);
-		void BeginScene();
-		void EndScene();
+		void DrawSprite(
+			const LPDIRECT3DTEXTURE9 tex,
+			const D3DXMATRIX& transform, 
+			const D3DCOLOR& color);
+		void DrawSprite(
+			const LPDIRECT3DTEXTURE9 tex,
+			const RECT& src_rect,
+			const D3DXVECTOR3& center,
+			const D3DXVECTOR3& position,
+			const D3DCOLOR& color);
+
 		void Render();
 
 		void GetRenderTarget(DWORD index, LPDIRECT3DSURFACE9* surface) const;
 		void SetRenderTarget(DWORD index, LPDIRECT3DSURFACE9 surface);
-		void SetTransform(D3DTRANSFORMSTATETYPE type, const D3DMATRIX* mat);
+		void SetTransform(D3DTRANSFORMSTATETYPE type, const D3DMATRIX& mat);
 
 	private:
 		std::list<std::function<void()>> _drawing_tasks;
