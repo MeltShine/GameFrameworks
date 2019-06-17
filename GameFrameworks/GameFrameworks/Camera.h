@@ -18,7 +18,7 @@ namespace meltshine
 	protected:
 		Camera();
 	public:
-		~Camera();
+		virtual ~Camera();
 
 		// Component을(를) 통해 상속됨
 		virtual bool Init(std::shared_ptr<Core> core) override;

@@ -12,7 +12,7 @@ namespace meltshine
 	protected:
 		Scene();
 	public:
-		~Scene();
+		virtual ~Scene();
 
 		virtual bool Init(std::shared_ptr<Core> core) override;
 		virtual void LateUpdate() override;
