@@ -10,6 +10,7 @@
 #include "Timer.h"
 #include "TextureCache.h"
 #include "FontCache.h"
+#include "AudioPlayer.h"
 
 #ifdef _DEBUG
 #define CRTDBG_MAP_ALLOC
@@ -133,6 +134,16 @@ namespace meltshine
 			return false;
 		}
 
+		_audio_player = std::shared_ptr<AudioPlayer>(new AudioPlayer);
+		if (!_audio_player || !_audio_player->Init(32, FMOD_LOOP_NORMAL))
+		{
+			MessageBox(
+				0,
+				TEXT("Core를 초기화하는데 실패했습니다. \n: AudioPlayer를 초기화하는데 실패했습니다."),
+				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
+			return false;
+		}
+
 		return true;
 	}
 
@@ -145,6 +156,7 @@ namespace meltshine
 		scene->LateUpdate();
 		scene->Render();
 		_renderer->Render();
+		_audio_player->Update();
 	}
 
 	void Core::GetWinSize(int& w, int& h) const

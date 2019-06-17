@@ -11,6 +11,7 @@ namespace meltshine
 	class Timer;
 	class TextureCache;
 	class FontCache;
+	class AudioPlayer;
 	class Core : public std::enable_shared_from_this<Core>
 	{
 	private:
@@ -38,7 +39,7 @@ namespace meltshine
 		std::shared_ptr<Timer> GetTimer() const { return _timer; };
 		std::shared_ptr<TextureCache> GetTextureCache() const { return _texture_cache; }
 		std::shared_ptr<FontCache> GetFontCache() const { return _font_cache; }
-
+		std::shared_ptr<AudioPlayer> GetAudioPlayer() const { return _audio_player; }
 	private:
 		HWND _window;
 		HINSTANCE _instance;
@@ -49,6 +50,7 @@ namespace meltshine
 		std::shared_ptr<Timer> _timer;
 		std::shared_ptr<TextureCache> _texture_cache;
 		std::shared_ptr<FontCache> _font_cache;
+		std::shared_ptr<AudioPlayer> _audio_player;
 
 	};
 }
