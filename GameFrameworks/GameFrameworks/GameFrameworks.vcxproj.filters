@@ -82,7 +82,7 @@
       <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="AudioPlayer.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +138,7 @@
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="AudioPlayer.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
