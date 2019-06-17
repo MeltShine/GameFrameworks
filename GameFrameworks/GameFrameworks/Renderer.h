@@ -42,7 +42,14 @@ namespace meltshine
 			const LPRECT rect,
 			const DWORD& format,
 			const D3DCOLOR& color);
+		void BeginScene();
+		void EndScene();
+		void Present();
 		void Render();
+
+		void GetRenderTarget(DWORD index, LPDIRECT3DSURFACE9* surface) const;
+		void SetRenderTarget(DWORD index, LPDIRECT3DSURFACE9 surface);
+		void SetTransform(D3DTRANSFORMSTATETYPE type, const D3DMATRIX* mat);
 
 	private:
 		std::list<std::function<void()>> _drawing_tasks;

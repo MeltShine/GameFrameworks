@@ -143,7 +143,7 @@ namespace meltshine
 	{
 		auto draw_string = [&]()
 		{
-			font->DrawTextA(_d3dx_sprite, str.c_str(), str.length(), rect, format, color);
+			font->DrawTextA(_d3dx_sprite, str.c_str(), (INT)str.length(), rect, format, color);
 		};
 
 		_drawing_tasks.emplace_back(std::move(draw_string));
@@ -158,22 +158,64 @@ namespace meltshine
 	{
 		auto draw_string = [&]()
 		{
-			font->DrawTextW(_d3dx_sprite, wstr.c_str(), wstr.length(), rect, format, color);
+			font->DrawTextW(_d3dx_sprite, wstr.c_str(), (INT)wstr.length(), rect, format, color);
 		};
 
 		_drawing_tasks.emplace_back(std::move(draw_string));
 	}
 
+	void Renderer::BeginScene()
+	{
+		auto begin_scene = [&]()
+		{
+			_d3d_device->BeginScene();
+		};
+
+		_drawing_tasks.emplace_back(std::move(begin_scene));
+	}
+
+	void Renderer::EndScene()
+	{
+		auto end_scene = [&]()
+		{
+			_d3d_device->EndScene();
+		};
+
+		_drawing_tasks.emplace_back(std::move(end_scene));
+	}
+
+	void Renderer::Present()
+	{
+		auto present = [&]()
+		{
+			_d3d_device->Present(nullptr, nullptr, nullptr, nullptr);
+		};
+
+		_drawing_tasks.emplace_back(std::move(present));
+	}
+
 	void Renderer::Render()
 	{
-		_d3d_device->BeginScene();
 		for (auto task : _drawing_tasks)
 		{
 			task();
 		}
-		_d3d_device->EndScene();
-		_d3d_device->Present(nullptr, nullptr, nullptr, nullptr);
 		_drawing_tasks.clear();
+	}
+
+	void Renderer::GetRenderTarget(DWORD index, LPDIRECT3DSURFACE9* surface) const
+	{
+		_d3d_device->GetRenderTarget(index, surface);
+	}
+
+	void Renderer::SetRenderTarget(DWORD index, LPDIRECT3DSURFACE9 surface)
+	{
+		_d3d_device->SetRenderTarget(index, surface);
+	}
+
+	void Renderer::SetTransform(D3DTRANSFORMSTATETYPE type, const D3DMATRIX* mat)
+	{
+		_d3d_device->SetTransform(type, mat);
 	}
 
 

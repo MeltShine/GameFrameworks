@@ -6,6 +6,7 @@
 
 // ÄÄÆ÷³ÍÆ®
 #include "Component.h"
+#include "Camera.h"
 
 namespace meltshine
 {
@@ -33,6 +34,19 @@ namespace meltshine
 		if (obj && obj->Init(_core.lock()))
 		{
 			obj->SetName("Empty Object");
+			return obj;
+		}
+		return nullptr;
+	}
+
+	std::shared_ptr<GameObject> ObjectManager::CreateCamera()
+	{
+		std::shared_ptr<GameObject> obj(new GameObject);
+		std::shared_ptr<Camera> cam = CreateComponent<Camera>();
+		if (obj && cam && obj->Init(_core.lock()))
+		{
+			obj->SetName("Camera");
+			obj->AddComponent(cam);
 			return obj;
 		}
 		return nullptr;

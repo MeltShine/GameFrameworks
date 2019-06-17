@@ -24,6 +24,7 @@ namespace meltshine
 
 		// 게임 오브젝트
 		std::shared_ptr<GameObject> CreateEmptyObject();
+		std::shared_ptr<GameObject> CreateCamera();
 		std::shared_ptr<Scene>	CreateEmptyScene();
 		template <typename SceneTy>
 		std::shared_ptr<SceneTy> CreateSceneAs()

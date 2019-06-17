@@ -6,7 +6,7 @@ namespace meltshine
 {
 	class Core;
 	class GameObject;
-	class Component
+	class Component : public std::enable_shared_from_this<Component>
 	{
 	public:
 		Component();

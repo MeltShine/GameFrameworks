@@ -27,27 +27,9 @@ namespace meltshine
 
 	}
 
-	void DefaultScene::PreRender()
-	{
-		Scene::PreRender();
-
-	}
-
 	void DefaultScene::Render()
 	{
 		Scene::Render();
-
-	}
-
-	void DefaultScene::PostRender()
-	{
-		Scene::PostRender();
-
-	}
-
-	void DefaultScene::RenderImage()
-	{
-		Scene::RenderImage();
 
 	}
 

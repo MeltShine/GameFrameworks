@@ -60,6 +60,9 @@
     <ClCompile Include="DefaultScene.cpp">
       <Filter>Test</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -100,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="DefaultScene.h">
       <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

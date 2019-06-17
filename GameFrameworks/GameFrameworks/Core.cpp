@@ -108,12 +108,7 @@ namespace meltshine
 		auto scene = _sc_ctrl->GetCurrentScene();
 		scene->Update(0.0f);
 		scene->LateUpdate();
-
-		// 장면 내 카메라 수 만큼 아래 과정을 반복한다.
-		scene->PreRender();
 		scene->Render();
-		scene->PostRender();
-		scene->RenderImage();
 		_renderer->Render();
 	}
 
