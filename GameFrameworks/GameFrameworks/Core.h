@@ -8,6 +8,7 @@ namespace meltshine
 	class Renderer;
 	class ObjectManager;
 	class SceneController;
+	class Timer;
 	class Core : public std::enable_shared_from_this<Core>
 	{
 	private:
@@ -32,6 +33,7 @@ namespace meltshine
 		std::shared_ptr<Renderer> GetRenderer() const { return _renderer; };
 		std::shared_ptr<ObjectManager> GetObjectManager() const { return _obj_mgr; };
 		std::shared_ptr<SceneController> GetSceneController() const { return _sc_ctrl; };
+		std::shared_ptr<Timer> GetTimer() const { return _timer; };
 
 	private:
 		HWND _window;
@@ -40,6 +42,7 @@ namespace meltshine
 		std::shared_ptr<Renderer> _renderer;
 		std::shared_ptr<ObjectManager> _obj_mgr;
 		std::shared_ptr<SceneController> _sc_ctrl;
+		std::shared_ptr<Timer> _timer;
 
 	};
 }

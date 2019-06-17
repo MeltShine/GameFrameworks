@@ -7,6 +7,7 @@
 #include "ObjectManager.h"
 #include "SceneController.h"
 #include "Scene.h"
+#include "Timer.h"
 
 #ifdef _DEBUG
 #define CRTDBG_MAP_ALLOC
@@ -100,13 +101,25 @@ namespace meltshine
 			return false;
 		}
 
+		_timer = std::shared_ptr<Timer>(new Timer);
+		if (!_timer)
+		{
+			MessageBox(
+				0,
+				TEXT("Core를 초기화하는데 실패했습니다. \n: Timer를 생성하는데 실패했습니다."),
+				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
+			return false;
+		}
+
 		return true;
 	}
 
 	void Core::Run()
 	{
+		_timer->CalculateDeltaTime();
+		auto dt = _timer->GetDeltaTime();
 		auto scene = _sc_ctrl->GetCurrentScene();
-		scene->Update(0.0f);
+		scene->Update(dt);
 		scene->LateUpdate();
 		scene->Render();
 		_renderer->Render();
