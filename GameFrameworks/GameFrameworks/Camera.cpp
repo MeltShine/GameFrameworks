@@ -149,7 +149,6 @@ namespace meltshine
 
 		auto renderer = GetRenderer();
 		renderer->EndScene();
-		renderer->Present();
 		if (HasRenderTexture())
 		{
 			renderer->SetRenderTarget(0, _surface_of_backbuffer);

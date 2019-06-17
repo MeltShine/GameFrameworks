@@ -44,7 +44,6 @@ namespace meltshine
 			const D3DCOLOR& color);
 		void BeginScene();
 		void EndScene();
-		void Present();
 		void Render();
 
 		void GetRenderTarget(DWORD index, LPDIRECT3DSURFACE9* surface) const;

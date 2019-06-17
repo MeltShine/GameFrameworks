@@ -185,22 +185,14 @@ namespace meltshine
 		_drawing_tasks.emplace_back(std::move(end_scene));
 	}
 
-	void Renderer::Present()
-	{
-		auto present = [&]()
-		{
-			_d3d_device->Present(nullptr, nullptr, nullptr, nullptr);
-		};
-
-		_drawing_tasks.emplace_back(std::move(present));
-	}
-
 	void Renderer::Render()
 	{
 		for (auto task : _drawing_tasks)
 		{
 			task();
 		}
+
+		_d3d_device->Present(0, 0, 0, 0);
 		_drawing_tasks.clear();
 	}
 
