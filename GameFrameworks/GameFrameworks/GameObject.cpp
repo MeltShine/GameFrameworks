@@ -48,6 +48,7 @@ namespace meltshine
 			return false;
 		}
 		AddComponent(transform);
+		_transform = transform;
 		return true;
 	}
 
