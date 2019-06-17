@@ -25,8 +25,8 @@ namespace meltshine
 		// ¸â¹öº¯¼ö (Getter)
 		D3DXVECTOR3 GetPosition() const { return _position; };
 		D3DXVECTOR3 GetRotation() const { return _rotation; };
-		D3DXVECTOR3 GetScale() const { _scale; };
-		D3DXMATRIX  GetTransformMatrix() const { _transform; };
+		D3DXVECTOR3 GetScale() const { return _scale; };
+		D3DXMATRIX  GetTransformMatrix() const { return _transform; };
 
 		// ¸â¹öº¯¼ö (Setter)
 		void SetPosition(D3DXVECTOR3 pos) { _position = pos; };
