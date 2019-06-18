@@ -25,6 +25,9 @@
     <Filter Include="Base">
       <UniqueIdentifier>{4ce4fb92-49cd-4f78-a4ac-c4980151f899}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{3ca89548-f051-4032-a750-9fc8cd21b3d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -87,6 +90,12 @@
     <ClCompile Include="TestCode.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="EventDispatcher.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventListener.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DefaultScene.h">
@@ -145,6 +154,12 @@
     </ClInclude>
     <ClInclude Include="TestCode.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="EventDispatcher.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventListener.h">
+      <Filter>Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

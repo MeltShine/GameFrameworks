@@ -160,6 +160,8 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DefaultScene.cpp" />
     <ClCompile Include="Direct3D.cpp" />
+    <ClCompile Include="EventDispatcher.cpp" />
+    <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="FontCache.cpp" />
     <ClCompile Include="main.cpp" />
@@ -182,6 +184,8 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="DefaultScene.h" />
     <ClInclude Include="Direct3D.h" />
+    <ClInclude Include="EventDispatcher.h" />
+    <ClInclude Include="EventListener.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="FontCache.h" />

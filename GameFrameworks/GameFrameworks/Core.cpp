@@ -11,6 +11,7 @@
 #include "TextureCache.h"
 #include "FontCache.h"
 #include "AudioPlayer.h"
+#include "EventDispatcher.h"
 
 #ifdef _DEBUG
 #define CRTDBG_MAP_ALLOC
@@ -140,6 +141,16 @@ namespace meltshine
 			MessageBox(
 				0,
 				TEXT("Core를 초기화하는데 실패했습니다. \n: AudioPlayer를 초기화하는데 실패했습니다."),
+				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
+			return false;
+		}
+
+		_evt_dispatcher = std::shared_ptr<EventDispatcher>(new EventDispatcher);
+		if (!_evt_dispatcher)
+		{
+			MessageBox(
+				0,
+				TEXT("Core를 초기화하는데 실패했습니다. \n: EventDispatcher를 생성하는데 실패했습니다."),
 				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
 			return false;
 		}
