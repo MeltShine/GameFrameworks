@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "Core.h"
 #include "TestCode.h"
+#include "InputHandler.h"
 namespace meltshine
 {
 	DefaultScene::DefaultScene()
@@ -32,6 +33,11 @@ namespace meltshine
 	{
 		Scene::Update(dt);
 
+
+		if (GetInputHandler()->GetKeyPress(VK_ESCAPE))
+		{
+			PostQuitMessage(0);
+		}
 	}
 
 	void DefaultScene::LateUpdate()
