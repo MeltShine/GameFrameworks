@@ -12,6 +12,7 @@
 #include "FontCache.h"
 #include "AudioPlayer.h"
 #include "EventDispatcher.h"
+#include "InputHandler.h"
 
 #ifdef _DEBUG
 #define CRTDBG_MAP_ALLOC
@@ -155,6 +156,16 @@ namespace meltshine
 			return false;
 		}
 
+		_input_handler = std::shared_ptr<InputHandler>(new InputHandler);
+		if (!_input_handler || !_input_handler->Init(_window))
+		{
+			MessageBox(
+				0,
+				TEXT("Core를 초기화하는데 실패했습니다. \n: InputHandler를 생성 및 초기화하는데 실패했습니다."),
+				TEXT("MeltShine GameFrameworks Error!"), MB_OK);
+			return false;
+		}
+
 		return true;
 	}
 
@@ -162,12 +173,21 @@ namespace meltshine
 	{
 		_timer->CalculateDeltaTime();
 		auto dt = _timer->GetDeltaTime();
+		
+		_input_handler->AcquireInput();
+
 		auto scene = _sc_ctrl->GetCurrentScene();
 		scene->Update(dt);
 		scene->LateUpdate();
 		scene->Render();
 		_renderer->Render();
+
 		_audio_player->Update();
+	}
+
+	void Core::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+	{
+		_input_handler->OnWndProc(hWnd, message, wParam, lParam);
 	}
 
 	void Core::GetWinSize(int& w, int& h) const

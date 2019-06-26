@@ -13,6 +13,7 @@ namespace meltshine
 	class FontCache;
 	class AudioPlayer;
 	class EventDispatcher;
+	class InputHandler;
 	class Core : public std::enable_shared_from_this<Core>
 	{
 	private:
@@ -27,6 +28,7 @@ namespace meltshine
 
 		bool Init(HWND window, HINSTANCE instance);
 		void Run();
+		void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 		void GetWinSize(int& w, int& h) const;
 		int GetWinWidth() const;
 		int GetWinHeight() const;
@@ -42,6 +44,7 @@ namespace meltshine
 		std::shared_ptr<FontCache> GetFontCache() const { return _font_cache; };
 		std::shared_ptr<AudioPlayer> GetAudioPlayer() const { return _audio_player; };
 		std::shared_ptr<EventDispatcher> GetEventDispatcher() const { return _evt_dispatcher; };
+		std::shared_ptr<InputHandler> GetInputHandler() const { return _input_handler; };
 
 	private:
 		HWND _window;
@@ -55,7 +58,7 @@ namespace meltshine
 		std::shared_ptr<FontCache> _font_cache;
 		std::shared_ptr<AudioPlayer> _audio_player;
 		std::shared_ptr<EventDispatcher> _evt_dispatcher;
-
+		std::shared_ptr<InputHandler> _input_handler;
 	};
 }
 #endif // !__MELTSHINE_CORE_H__

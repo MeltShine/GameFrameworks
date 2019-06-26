@@ -22,5 +22,14 @@ int main()
 	auto scene = core->GetObjectManager()->CreateSceneAs<DefaultScene>();
 	core->GetSceneController()->PushScene(scene);
 	app->SetOnRunCallback(std::bind(&Core::Run, core));
+	app->SetOnWndProcCallback(
+		std::bind(
+			&Core::WndProc, core,
+			std::placeholders::_1,
+			std::placeholders::_2,
+			std::placeholders::_3,
+			std::placeholders::_4)
+	);
+
 	return app->Run();
 }
