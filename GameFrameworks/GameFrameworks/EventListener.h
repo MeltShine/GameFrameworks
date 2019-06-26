@@ -11,13 +11,13 @@ namespace meltshine
 		Event(EventType type);
 		virtual ~Event();
 
-		EventType GetType() const { return type_; };
-		bool IsStopped() const { return is_stopped_; };
-		void StopPropagation() { is_stopped_ = true; };
+		EventType GetType() const { return _type; };
+		bool IsStopped() const { return _is_stopped; };
+		void StopPropagation() { _is_stopped = true; };
 
 	protected:
-		EventType type_;
-		bool is_stopped_;
+		EventType _type;
+		bool _is_stopped;
 	};
 	class EventListener
 	{

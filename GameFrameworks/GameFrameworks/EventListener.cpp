@@ -10,8 +10,8 @@ namespace meltshine
 
 
 	Event::Event(EventType type) 
-		: type_(type)
-		, is_stopped_(false)
+		: _type(type)
+		, _is_stopped(false)
 	{
 	}
 
