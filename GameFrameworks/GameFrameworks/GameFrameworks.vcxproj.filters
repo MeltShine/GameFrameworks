@@ -96,6 +96,9 @@
     <ClCompile Include="EventListener.cpp">
       <Filter>Event</Filter>
     </ClCompile>
+    <ClCompile Include="KeyboardEventListener.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DefaultScene.h">
@@ -159,6 +162,9 @@
       <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="EventListener.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardEventListener.h">
       <Filter>Event</Filter>
     </ClInclude>
   </ItemGroup>

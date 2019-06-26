@@ -164,6 +164,7 @@
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="FontCache.cpp" />
+    <ClCompile Include="KeyboardEventListener.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PathUtil.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="EventDispatcher.h" />
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="KeyboardEventListener.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="FontCache.h" />
     <ClInclude Include="PathUtil.h" />
