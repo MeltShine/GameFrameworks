@@ -45,6 +45,8 @@ namespace meltshine
 		SetRenderer(core->GetRenderer());
 		SetObjectManager(core->GetObjectManager());
 		SetSceneController(core->GetSceneController());
+		SetInputHandler(core->GetInputHandler());
+		SetEventDispatcher(core->GetEventDispatcher());
 		auto transform = GetObjectManager()->CreateComponent<Transform>();
 		if (transform == nullptr)
 		{
