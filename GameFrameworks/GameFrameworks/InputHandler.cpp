@@ -52,6 +52,7 @@ namespace meltshine
 		if (window)
 		{
 			_window = window;
+			return true;
 		}
 		return false;
 	}
