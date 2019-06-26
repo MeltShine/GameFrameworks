@@ -19,30 +19,30 @@ namespace meltshine
 
 	void EventDispatcher::AddEventListener(std::shared_ptr<EventListener> listener)
 	{
-		if (listener->is_registered_)
+		if (listener->_is_registered)
 			return;
 
-		listeners_.push_back(listener);
-		listener->is_registered_ = true;
+		_listeners.push_back(listener);
+		listener->_is_registered = true;
 	}
 
 	void EventDispatcher::RemoveEventListener(std::shared_ptr<EventListener> listener)
 	{
-		listeners_.remove(listener);
+		_listeners.remove(listener);
 	}
 
 	void EventDispatcher::RemoveAllEventListener()
 	{
-		while (!listeners_.empty())
+		while (!_listeners.empty())
 		{
-			listeners_.back()->is_registered_ = false;
-			listeners_.pop_back();
+			_listeners.back()->_is_registered = false;
+			_listeners.pop_back();
 		}
 	}
 
 	void EventDispatcher::DispatchEvent(Event* evt)
 	{
-		for (auto& listener : listeners_)
+		for (auto& listener : _listeners)
 		{
 			if (evt->IsStopped())
 				break;

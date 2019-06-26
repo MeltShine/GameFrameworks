@@ -20,7 +20,7 @@ namespace meltshine
 		void DispatchEvent(Event* evt);
 
 	private:
-		std::list<std::shared_ptr<EventListener>> listeners_;
+		std::list<std::shared_ptr<EventListener>> _listeners;
 
 	};
 }

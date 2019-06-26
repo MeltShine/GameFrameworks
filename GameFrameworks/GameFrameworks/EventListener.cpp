@@ -25,8 +25,8 @@ namespace meltshine
 	}
 
 	EventListener::EventListener(EventType type)
-		: type_(type)
-		, is_registered_(false)
+		: _type(type)
+		, _is_registered(false)
 	{
 	}
 

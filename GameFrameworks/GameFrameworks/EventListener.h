@@ -27,12 +27,12 @@ namespace meltshine
 		virtual ~EventListener();
 
 		virtual void OnEvent(Event* evt) = 0;
-		EventType GetType() const { return type_; };
-		bool IsRegistered() const { return is_registered_; };
+		EventType GetType() const { return _type; };
+		bool IsRegistered() const { return _is_registered; };
 
 	protected:
-		EventType type_;
-		bool is_registered_;
+		EventType _type;
+		bool _is_registered;
 
 		friend class EventDispatcher;
 	};
