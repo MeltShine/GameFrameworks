@@ -44,9 +44,11 @@ namespace meltshine
 	{
 		for (auto& listener : _listeners)
 		{
-			if (evt->IsStopped())
-				break;
-			listener->OnEvent(evt);
+			if (listener->_type == evt->_type && 
+				evt->IsStopped() == false)
+			{
+				listener->OnEvent(evt);
+			}
 		}
 	}
 	

@@ -4,7 +4,7 @@
 namespace meltshine
 {
 	Event::Event()
-		: Event(ET_NONE)
+		: Event(EventType::EVENT_NONE)
 	{
 	}
 
@@ -20,7 +20,7 @@ namespace meltshine
 	}
 
 	EventListener::EventListener()
-		: EventListener(ET_NONE)
+		: EventListener(EventType::EVENT_NONE)
 	{
 	}
 

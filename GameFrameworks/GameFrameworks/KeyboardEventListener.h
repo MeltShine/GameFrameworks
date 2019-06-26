@@ -1,7 +1,6 @@
 #ifndef __MELTSHINE_KEYBOARDEVENTLISTENER_H__
 #define __MELTSHINE_KEYBOARDEVENTLISTENER_H__
 
-#include <functional>
 #include "EventListener.h"
 namespace meltshine
 {
@@ -24,9 +23,12 @@ namespace meltshine
 
 	class KeyboardEventListener : public EventListener
 	{
-	public:
+	protected:
 		KeyboardEventListener();
+
+	public:
 		virtual ~KeyboardEventListener();
+		static std::shared_ptr<KeyboardEventListener> Create();
 
 		std::function<void(char, Event*)> _on_key_pressed;
 		std::function<void(char, Event*)> _on_key_released;

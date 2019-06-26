@@ -1,9 +1,11 @@
 #ifndef __MELTSHINE_EVENTLISTENER_H__
 #define __MELTSHINE_EVENTLISTENER_H__
 
+#include <memory>
+#include <functional>
 namespace meltshine
 {
-	enum EventType { ET_NONE, ET_KEYBOARD, ET_MOUSE, ET_COMMAND };
+	enum class EventType { EVENT_NONE, EVENT_KEYBOARD, EVENT_MOUSE, EVENT_COMMAND };
 	class Event
 	{
 	public:
@@ -18,6 +20,8 @@ namespace meltshine
 	protected:
 		EventType _type;
 		bool _is_stopped;
+
+		friend class EventDispatcher;
 	};
 	class EventListener
 	{
