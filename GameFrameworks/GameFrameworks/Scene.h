@@ -16,10 +16,6 @@ namespace meltshine
 
 		virtual bool Init(std::shared_ptr<Core> core) override;
 		virtual void LateUpdate() override;
-		virtual void PreRender() override;
-		virtual void Render() override;
-		virtual void PostRender() override;
-		virtual void RenderImage() override;
 		
 		std::shared_ptr<Camera> GetVisitingCamera() const { return _visiting_camera; };
 		std::shared_ptr<Camera> GetDefaultCamera() const { return _default_camera; };
