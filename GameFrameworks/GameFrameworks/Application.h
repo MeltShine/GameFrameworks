@@ -34,8 +34,14 @@ namespace meltshine
 		void GetScreenSize(int& w, int& h);
 
 		// 멤버 (Setter)
-		inline void SetOnRunCallback(std::function<void()> callback) {
+		inline void SetOnRunCallback(std::function<void()> callback)
+		{
 			_on_run_callback = std::move(callback);
+		}
+
+		inline void SetOnWndProcCallback(std::function<void(HWND, UINT, WPARAM, LPARAM)> callback)
+		{
+			_on_wnd_proc_callback = std::move(callback);
 		}
 
 	protected:
@@ -46,6 +52,7 @@ namespace meltshine
 
 		// 콜백함수
 		std::function<void()> _on_run_callback;
+		std::function<void(HWND, UINT, WPARAM, LPARAM)> _on_wnd_proc_callback;
 
 		// 싱글턴을 위해 제한된 생성자
 		Application();

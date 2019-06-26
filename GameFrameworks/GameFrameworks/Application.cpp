@@ -142,6 +142,11 @@ namespace meltshine
 
 	LRESULT Application::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
+		if (_on_wnd_proc_callback)
+		{
+			_on_wnd_proc_callback(hWnd, message, wParam, lParam);
+		}
+
 		switch (message)
 		{
 		case WM_DESTROY:
