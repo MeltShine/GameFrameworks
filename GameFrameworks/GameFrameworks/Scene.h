@@ -37,6 +37,7 @@ namespace meltshine
 		friend class ObjectManager;
 		friend class SceneController;
 		friend class Camera;
+		friend class Core;
 	};
 }
 #endif // !__MELTSHINE_SCENE_H__

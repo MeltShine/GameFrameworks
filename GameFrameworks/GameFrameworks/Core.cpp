@@ -179,7 +179,14 @@ namespace meltshine
 		auto scene = _sc_ctrl->GetCurrentScene();
 		scene->Update(dt);
 		scene->LateUpdate();
-		scene->Render();
+		for (auto cam : scene->_cameras)
+		{
+			scene->SetVisitingCamera(cam);
+			scene->PreRender();
+			scene->Render();
+			scene->PostRender();
+			scene->RenderImage();
+		}
 		_renderer->Render();
 
 		_audio_player->Update();

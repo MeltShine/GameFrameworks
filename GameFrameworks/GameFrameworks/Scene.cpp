@@ -7,6 +7,7 @@
 namespace meltshine
 {
 	Scene::Scene()
+		: _dirty_cameras(false)
 	{
 	}
 
@@ -32,30 +33,6 @@ namespace meltshine
 	{
 		GameObject::LateUpdate();
 		SortCameras();
-	}
-
-	void Scene::PreRender()
-	{
-	}
-
-	void Scene::Render()
-	{
-		for (auto& cam : _cameras)
-		{
-			SetVisitingCamera(cam);
-			GameObject::PreRender();
-			GameObject::Render();
-			GameObject::PostRender();
-			GameObject::RenderImage();
-		}
-	}
-
-	void Scene::PostRender()
-	{
-	}
-
-	void Scene::RenderImage()
-	{
 	}
 
 	void Scene::SortCameras()
